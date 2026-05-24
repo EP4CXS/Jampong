@@ -1,4 +1,10 @@
 pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
     def flutterSdkPath = {
         def properties = new Properties()
         file("local.properties").withInputStream { properties.load(it) }
@@ -15,6 +21,40 @@ pluginManagement {
     }
 }
 
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "8.9.1" apply false
+    id "org.jetbrains.kotlin.android" version "2.1.0" apply false
+}
+
 include ":app"
 
-apply from: "${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle/app_plugin_loader.gradle"
+def writeAgentDebug = { String hypothesisId, String location, String message, Map data ->
+    try {
+        def file = new File(settingsDir.parentFile, "debug-7537ad.log")
+        def payload = [
+                sessionId   : "7537ad",
+                runId       : "pre-fix",
+                hypothesisId: hypothesisId,
+                location    : location,
+                message     : message,
+                data        : data,
+                timestamp   : System.currentTimeMillis(),
+        ]
+        file << groovy.json.JsonOutput.toJson(payload) + System.lineSeparator()
+    } catch (Exception ignored) {}
+}
+
+// #region agent log
+writeAgentDebug(
+        "H1",
+        "android/settings.gradle:45",
+        "android_plugin_versions_loaded",
+        [
+                agpVersion   : "8.9.1",
+                kotlinVersion: "2.1.0",
+                gradleVersion: gradle.gradleVersion,
+                javaVersion  : System.getProperty("java.version"),
+        ]
+)
+// #endregion

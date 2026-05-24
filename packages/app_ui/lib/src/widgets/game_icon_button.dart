@@ -36,13 +36,13 @@ class GameIconButton extends StatelessWidget {
 
   static const _defaultGradient = LinearGradient(
     colors: [
-      Color(0xFFB1B1B1),
-      Color(0xFF363567),
+      Color(0xFF334155),
+      Color(0xFF1E293B),
     ],
   );
 
   static final _defaultBorder = Border.all(
-    color: Colors.white,
+    color: const Color(0xFF475569),
   );
 
   @override
@@ -61,7 +61,7 @@ class GameIconButton extends StatelessWidget {
           child: Icon(
             icon,
             size: size ?? 24,
-            color: Colors.white,
+            color: const Color(0xFFF8FAFC),
           ),
         ),
       ),

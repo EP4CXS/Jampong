@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:leap/leap.dart';
 import 'package:super_dash/audio/audio.dart';
 import 'package:super_dash/game/game.dart';
+import 'package:super_dash/procedural/procedural.dart';
 import 'package:super_dash/score/score.dart';
 
 bool _tsxPackingFilter(Tileset tileset) {
@@ -99,12 +100,15 @@ class SuperDashGame extends LeapGame
     }
   }
 
+  void triggerPrimaryInput() {
+    _triggerInputListeners();
+    overlays.remove('tapToJump');
+  }
+
   @override
   void onTapDown(TapDownInfo info) {
     super.onTapDown(info);
-
-    _triggerInputListeners();
-    overlays.remove('tapToJump');
+    onPointerInputEvent(game: this);
   }
 
   @override
@@ -158,8 +162,7 @@ class SuperDashGame extends LeapGame
       KeyboardListenerComponent(
         keyDown: {
           LogicalKeyboardKey.space: (_) {
-            _triggerInputListeners();
-            overlays.remove('tapToJump');
+            onKeyboardInputEvent(game: this);
             return false;
           },
         },
@@ -169,6 +172,15 @@ class SuperDashGame extends LeapGame
           },
         },
       ),
+    );
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    onTimerTickEvent(
+      game: this,
+      deltaSeconds: dt,
     );
   }
 
@@ -205,6 +217,7 @@ class SuperDashGame extends LeapGame
   }
 
   void gameOver() {
+    showGameOver();
     gameBloc.add(const GameOver());
     // Removed since the result didn't ended up good.
     // Leaving in comment if we decide to bring it back.
@@ -369,6 +382,16 @@ class SuperDashGame extends LeapGame
 
   void toggleInvincibility() {
     player?.isPlayerInvincible = !(player?.isPlayerInvincible ?? false);
+  }
+
+  void pauseGameplay() {
+    pauseEngine();
+    overlays.add('pauseOverlay');
+  }
+
+  void resumeGameplay() {
+    overlays.remove('pauseOverlay');
+    resumeEngine();
   }
 
   void teleportPlayerToEnd() {

@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Super Dash</string>
+	<string>Jump Mong</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -43,5 +43,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+<key>NSMicrophoneUsageDescription</key>
+<string>This app needs microphone access for voice control.</string>
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>This app needs speech recognition for voice control.</string>
 </dict>
 </plist>

@@ -29,56 +29,99 @@ class AppTextStyles {
 
   static const TextStyle _commonStyle = TextStyle(
     fontFamily: 'Google Sans',
-    color: Colors.white,
+    color: Color(0xFFF8FAFC),
     package: package,
-    decorationColor: Colors.white,
+    decorationColor: Color(0xFFF8FAFC),
   );
 
   /// Display large text style.
-  static TextStyle get displayLarge => _commonStyle;
+  static TextStyle get displayLarge => _commonStyle.copyWith(
+        fontSize: 48,
+        fontWeight: FontWeight.w700,
+      );
 
   /// Display medium text style.
-  static TextStyle get displayMedium => _commonStyle;
+  static TextStyle get displayMedium => _commonStyle.copyWith(
+        fontSize: 40,
+        fontWeight: FontWeight.w700,
+      );
 
   /// Display small text style.
-  static TextStyle get displaySmall => _commonStyle;
+  static TextStyle get displaySmall => _commonStyle.copyWith(
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
+      );
 
   /// Headline large text style.
-  static TextStyle get headlineLarge => _commonStyle;
+  static TextStyle get headlineLarge => _commonStyle.copyWith(
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
+      );
 
   /// Headline medium text style.
-  static TextStyle get headlineMedium => _commonStyle;
+  static TextStyle get headlineMedium => _commonStyle.copyWith(
+        fontSize: 28,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Headline small text style.
-  static TextStyle get headlineSmall => _commonStyle;
+  static TextStyle get headlineSmall => _commonStyle.copyWith(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Title large text style.
-  static TextStyle get titleLarge => _commonStyle;
+  static TextStyle get titleLarge => _commonStyle.copyWith(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Title medium text style.
-  static TextStyle get titleMedium => _commonStyle;
+  static TextStyle get titleMedium => _commonStyle.copyWith(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Title small text style.
-  static TextStyle get titleSmall => _commonStyle;
+  static TextStyle get titleSmall => _commonStyle.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Body large text style.
   static TextStyle get bodyLarge => _commonStyle.copyWith(
         fontSize: 16,
+        color: const Color(0xFFCBD5E1),
         height: 1.5,
       );
 
   /// Body medium text style.
-  static TextStyle get bodyMedium => _commonStyle;
+  static TextStyle get bodyMedium => _commonStyle.copyWith(
+        fontSize: 14,
+        color: const Color(0xFFCBD5E1),
+      );
 
   /// Body small text style.
-  static TextStyle get bodySmall => _commonStyle;
+  static TextStyle get bodySmall => _commonStyle.copyWith(
+        fontSize: 12,
+        color: const Color(0xFFCBD5E1),
+      );
 
   /// Label large text style.
-  static TextStyle get labelLarge => _commonStyle;
+  static TextStyle get labelLarge => _commonStyle.copyWith(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      );
 
   /// Label medium text style.
-  static TextStyle get labelMedium => _commonStyle;
+  static TextStyle get labelMedium => _commonStyle.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      );
 
   /// Label small text style.
-  static TextStyle get labelSmall => _commonStyle;
+  static TextStyle get labelSmall => _commonStyle.copyWith(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      );
 }

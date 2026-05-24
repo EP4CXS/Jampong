@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:super_dash/constants/constants.dart';
 import 'package:super_dash/gen/assets.gen.dart';
 import 'package:super_dash/l10n/l10n.dart';
+import 'package:super_dash/theme/theme.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class GameInfoDialog extends StatelessWidget {
@@ -36,7 +37,23 @@ class GameInfoDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 24),
-          Assets.images.gameLogo.image(width: 230),
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              color: AppColors.surface.withValues(alpha: .72),
+              borderRadius: BorderRadius.circular(AppRadii.xLarge),
+              border: Border.all(color: AppColors.outline),
+              boxShadow: AppShadows.soft,
+            ),
+            padding: const EdgeInsets.all(AppSpacing.large),
+            child: Assets.images.dashWins.image(fit: BoxFit.contain),
+          ),
+          const SizedBox(height: AppSpacing.medium),
+          Text(
+            'Jump Mong',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
           const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),

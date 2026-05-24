@@ -1,9 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:super_dash/constants/constants.dart';
 import 'package:super_dash/game_intro/game_intro.dart';
 import 'package:super_dash/l10n/l10n.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -27,19 +24,6 @@ class BottomBar extends StatelessWidget {
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                RichText(
-                  text: TextSpan(
-                    text: l10n.howItsMade,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                    ),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => launchUrlString(Urls.howWeBuilt),
                   ),
                 ),
               ],

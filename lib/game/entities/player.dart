@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:leap/leap.dart';
 import 'package:super_dash/audio/audio.dart';
 import 'package:super_dash/game/game.dart';
+import 'package:super_dash/procedural/procedural.dart';
 
 class Player extends JumperCharacter<SuperDashGame> {
   Player({
@@ -167,6 +168,10 @@ class Player extends JumperCharacter<SuperDashGame> {
         !isPlayerInvincible) {
       // If player has no golden feathers, game over.
       if (!hasGoldenFeather) {
+        onCollisionTriggeredEvent(
+          game: gameRef,
+          collisionType: 'hazard',
+        );
         _animateToGameOver(DashState.deathPit);
         return;
       }
@@ -192,9 +197,17 @@ class Player extends JumperCharacter<SuperDashGame> {
             gameRef.gameBloc.add(
               GameScoreIncreased(by: collision.type.points),
             );
+            onCollisionTriggeredEvent(
+              game: gameRef,
+              collisionType: 'item-pickup',
+            );
           case ItemType.goldenFeather:
             addPowerUp();
             gameRef.audioController.playSfx(Sfx.featherPowerup);
+            onCollisionTriggeredEvent(
+              game: gameRef,
+              collisionType: 'item-pickup',
+            );
         }
         gameRef.world.add(
           ItemEffect(
@@ -209,6 +222,10 @@ class Player extends JumperCharacter<SuperDashGame> {
         // If player has no golden feathers, game over.
         if (!hasGoldenFeather) {
           health -= collision.enemyDamage;
+          onCollisionTriggeredEvent(
+            game: gameRef,
+            collisionType: 'enemy-hit',
+          );
           return;
         }
 
@@ -237,6 +254,10 @@ class Player extends JumperCharacter<SuperDashGame> {
   }
 
   void _animateToGameOver([DashState deathState = DashState.deathFaint]) {
+    onCollisionTriggeredEvent(
+      game: gameRef,
+      collisionType: 'game-over',
+    );
     stateBehavior.state = deathState;
     super.walking = false;
     _gameOverTimer = 1.4;

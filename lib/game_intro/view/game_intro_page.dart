@@ -6,6 +6,8 @@ import 'package:super_dash/game/game.dart';
 import 'package:super_dash/game_intro/game_intro.dart';
 import 'package:super_dash/gen/assets.gen.dart';
 import 'package:super_dash/l10n/l10n.dart';
+import 'package:super_dash/procedural/procedural.dart';
+import 'package:super_dash/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GameIntroPage extends StatefulWidget {
@@ -20,6 +22,7 @@ class _GameIntroPageState extends State<GameIntroPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     precacheImage(Assets.images.gameBackground.provider(), context);
+    drawMenu();
   }
 
   void _onDownload() {
@@ -65,8 +68,25 @@ class _IntroPage extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Assets.images.gameLogo.image(
-              width: context.isSmall ? 282 : 380,
+            Container(
+              width: context.isSmall ? 220 : 260,
+              height: context.isSmall ? 220 : 260,
+              decoration: BoxDecoration(
+                color: AppColors.surface.withValues(alpha: .72),
+                borderRadius: BorderRadius.circular(AppRadii.xLarge),
+                border: Border.all(color: AppColors.outline),
+                boxShadow: AppShadows.soft,
+              ),
+              padding: const EdgeInsets.all(AppSpacing.large),
+              child: Assets.images.dashWins.image(
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.medium),
+            Text(
+              'Jump Mong',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.headlineLarge,
             ),
             const Spacer(flex: 4),
             Padding(
@@ -83,7 +103,13 @@ class _IntroPage extends StatelessWidget {
             const SizedBox(height: 32),
             GameElevatedButton(
               label: l10n.gameIntroPagePlayButtonText,
-              onPressed: () => Navigator.of(context).push(Game.route()),
+              onPressed: () {
+                onMenuSelectionEvent(
+                  action: MenuAction.startGame,
+                  context: context,
+                );
+                Navigator.of(context).push(Game.route());
+              },
             ),
             const Spacer(),
             const Row(
@@ -121,7 +147,26 @@ class _MobileWebNotAvailableIntroPage extends StatelessWidget {
         child: Column(
           children: [
             const Spacer(),
-            Assets.images.gameLogo.image(width: 282),
+            Container(
+              width: 220,
+              height: 220,
+              decoration: BoxDecoration(
+                color: AppColors.surface.withValues(alpha: .72),
+                borderRadius: BorderRadius.circular(AppRadii.xLarge),
+                border: Border.all(color: AppColors.outline),
+                boxShadow: AppShadows.soft,
+              ),
+              padding: const EdgeInsets.all(AppSpacing.large),
+              child: Assets.images.dashWins.image(
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.medium),
+            Text(
+              'Jump Mong',
+              textAlign: TextAlign.center,
+              style: textTheme.headlineSmall,
+            ),
             const Spacer(flex: 4),
             const SizedBox(height: 24),
             Text(

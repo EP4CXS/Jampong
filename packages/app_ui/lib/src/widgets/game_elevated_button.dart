@@ -44,12 +44,19 @@ class GameElevatedButton extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0xFFADD7CD),
-                Color(0xFF57AEA5),
+                Color(0xFF7C5CFF),
+                Color(0xFF5B8CFF),
               ],
             ),
-        border: Border.all(color: Colors.white24),
+        border: Border.all(color: const Color(0xFF334155)),
         borderRadius: BorderRadius.circular(94),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x55000000),
+            blurRadius: 20,
+            offset: Offset(0, 10),
+          ),
+        ],
       ),
       child: Theme(
         data: theme.copyWith(
@@ -57,6 +64,7 @@ class GameElevatedButton extends StatelessWidget {
             style: FilledButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
+              foregroundColor: const Color(0xFFF8FAFC),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(94),
               ),

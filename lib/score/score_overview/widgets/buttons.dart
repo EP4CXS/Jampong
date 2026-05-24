@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:super_dash/l10n/l10n.dart';
+import 'package:super_dash/procedural/procedural.dart';
 import 'package:super_dash/score/score.dart';
 import 'package:super_dash/share/share.dart';
 
@@ -58,6 +59,8 @@ class WebButtons extends StatelessWidget {
         const _SeeTheRankingButton(),
         const SizedBox(height: 24),
         const _PlayAgainButton(),
+        const SizedBox(height: 12),
+        const _ExitButton(),
       ],
     );
   }
@@ -87,6 +90,8 @@ class MobileButtons extends StatelessWidget {
         const _PlayAgainButton(),
         const SizedBox(height: 24),
         const _SeeTheRankingButton(),
+        const SizedBox(height: 12),
+        const _ExitButton(),
       ],
     );
   }
@@ -131,7 +136,13 @@ class _PlayAgainButton extends StatelessWidget {
       icon: const Icon(Icons.refresh, size: 16),
       label: context.l10n.playAgain,
       gradient: _gradient,
-      onPressed: context.flow<ScoreState>().complete,
+      onPressed: () {
+        onMenuSelectionEvent(
+          action: MenuAction.restartGame,
+          context: context,
+        );
+        context.flow<ScoreState>().complete();
+      },
     );
   }
 }
@@ -146,6 +157,21 @@ class _SeeTheRankingButton extends StatelessWidget {
       onPressed: () {
         context.read<ScoreBloc>().add(const ScoreLeaderboardRequested());
       },
+    );
+  }
+}
+
+class _ExitButton extends StatelessWidget {
+  const _ExitButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () => onMenuSelectionEvent(
+        action: MenuAction.exitGame,
+        context: context,
+      ),
+      child: const Text('Exit'),
     );
   }
 }

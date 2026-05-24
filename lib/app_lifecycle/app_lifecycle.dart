@@ -59,6 +59,7 @@ class AppLifecycleObserverState extends State<AppLifecycleObserver>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+
     _log.info('Subscribed to app lifecycle updates');
   }
 }
